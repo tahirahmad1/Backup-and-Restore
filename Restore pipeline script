@@ -1,0 +1,13 @@
+pipeline {
+    agent any
+ stages {    
+    stage("Restoring The Database") {
+        steps {
+            sh "docker exec mariadb_db_1 mysql -uroot -pexample -e 'DROP DATABASE bitnamimoodle;' || true"
+            sh "docker exec mariadb_db_1 mysql -uroot -pexample -e 'CREATE DATABASE bitnamimoodle;'"
+            sh "docker exec mariadb_db_1 sh -c 'mysql -u root -pexample bitnamimoodle < /backup.sql'"
+            sh 'exit'
+    }       
+        }
+    }
+        }
