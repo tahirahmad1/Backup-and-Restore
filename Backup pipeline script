@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+ stages {    
+    stage("Creating Database Backup") {
+        steps {
+            sh "docker exec mariadb_db_1 sh -c 'mysqldump -u root -pexample bitnamimoodle > /backup.sql'"
+            sh 'exit'
+    }       
+        }
+    }
+        }
